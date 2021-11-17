@@ -67,7 +67,7 @@ public class EchoThread extends Thread {
                         output.writeObject("Todos escolheram. Adivinhe quantos palitos há no total");
 
                         message = (String) input.readObject();
-                        System.out.println(String.format("client %s >> %s", clientNumber, message));
+                        System.out.println(String.format("client %s >> %s", clientNumber, message)); // Checar se as escolhas não são iguais
                         boolean isValid = true;
                         do {
                             isValid = true;
@@ -95,7 +95,7 @@ public class EchoThread extends Thread {
                             Thread.sleep(1000);
                         }
 
-                        Integer totalSticks = server.clients.stream().reduce(0, (acc, c) -> acc + c.choice, Integer::sum);
+                        Integer totalSticks = server.clients.stream().reduce(0, (acc, c) -> acc + c.choice, Integer::sum);          // Soma os palitos
 
                         if(this.guess == totalSticks) {
                             this.sticks--;
@@ -108,7 +108,7 @@ public class EchoThread extends Thread {
 
                         Thread.sleep(1000);
 
-                        EchoThread winner = server.clients.stream().filter(c -> c.sticks == 0).findFirst().orElse(null);
+                        EchoThread winner = server.clients.stream().filter(c -> c.sticks == 0).findFirst().orElse(null);  // Checa se tem um vencedor(numero de palitos 0)
                         if(winner == null) {
                             output.writeObject("Ninguém venceu ainda...");
                             server.gameStatus = GameStatus.PICKING_STICKS;
@@ -120,7 +120,7 @@ public class EchoThread extends Thread {
                             server.gameStatus = GameStatus.DONE;
                         }
 
-                        if(server.gameStatus == GameStatus.DONE) {
+                        if(server.gameStatus == GameStatus.DONE) {  // Finaliza jogo
                             break;
                         }
 

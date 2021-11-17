@@ -38,10 +38,10 @@ public class Client {
             System.out.println("Número de palitos >> " + sticks);
 
             do {
-                System.out.print("Quantos palitos você quer colocar em jogo? ");
                 do {
+                    System.out.print("Quantos palitos você quer colocar em jogo? ");
                     message = scanner.nextLine();
-                } while(Integer.parseInt(message) > sticks || Integer.parseInt(message) < 0);
+                } while(Integer.parseInt(message) > sticks || Integer.parseInt(message) < 0); // ||  Verifica se os palitos então entre 0 até o que o player tem na mão
 
                 output.writeObject(message);
                 output.flush();
@@ -53,7 +53,7 @@ public class Client {
                 System.out.println("Server>> " + message); // "Todos escolheram. Adivinhe quantos palitos há no total"
 
                 do {
-                    message = scanner.nextLine();
+                    message = scanner.nextLine();    // Depende se o valor foi escolhido ou não
                     output.writeObject(message);
                     output.flush();
                     message = (String) input.readObject();
